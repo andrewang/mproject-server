@@ -26,6 +26,6 @@ function mProject_autoLoader(string $class)
 
     if (file_exists($class)) {
         /** @noinspection PhpIncludeInspection */
-        include_once $class;
+        include $class;
     }
 }
