@@ -2,3 +2,5 @@ language: php
 
 php:
   - '7'
+
+script: phpunit --bootstrap core/autoLoader.php ./unittest
