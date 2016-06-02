@@ -32,10 +32,17 @@ class URLTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($url->getQueries());
     }
 
+    public function testURLToString()
+    {
+        $_SERVER['HTTPS'] = 'on';
+        $url = \Core\HTTP\URL::createFromGlobals();
+        $this->assertEquals('https://fuyukai.moe/api/v1/data/manga/1/?test=123', (string)$url);
+    }
+
     public function setUp()
     {
         $_SERVER['SERVER_NAME'] = 'fuyukai.moe';
-        $_SERVER['REQUEST_URI'] = '/api/v1/data/manga/1/?test=123#abc';
+        $_SERVER['REQUEST_URI'] = '/api/v1/data/manga/1/?test=123';
     }
 
     public function tearDown()

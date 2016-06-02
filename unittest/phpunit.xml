@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2016. Benjamin Rannow <rannow@emerise.de>
+  ~ License: MIT
+  ~ Author: Benjamin Rannow <rannow@emerise.de>
+  ~ Project: M-Project
+  -->
+<phpunit
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        bootstrap="../core/autoLoader.php"
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertWarningsToExceptions="true"
+        forceCoversAnnotation="false"
+        processIsolation="false"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        verbose="false">
+
+    <testsuites>
+        <testsuite name="ALL_TESTS">
+            <directory>../unittest/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="false">
+            <directory suffix=".php">../core/</directory>
+            <directory suffix=".php">../src/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" />
+    </logging>
+</phpunit>
