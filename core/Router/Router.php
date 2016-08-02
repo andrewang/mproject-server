@@ -81,14 +81,12 @@ class Router
      *
      * returned true if url matched otherwise false
      *
-     * PS: current only STRICT mode (all slashes must the same at start and end)
-     *
      * @param string $route
      * @param string $path
      * @param array &$params
      * @return bool
      */
-    protected function matchRoute(string $route, string $path, array &$params) : bool
+    protected function matchRoute(string $route, string $path, array &$params, bool $strict=false) : bool
     {
         $re = "/\\{(.*?)\\}/";
         preg_match_all($re, $route, $ids);
@@ -96,7 +94,12 @@ class Router
         if (!empty($ids) && count($ids) == 2) {
             $keys = $ids[1];
         }
-        $pattern = '/^'.str_replace('/', '\/', preg_replace($re, '(.*?)', $route)).'$/';
+        $subPattern = str_replace('/', '\/', preg_replace($re, '(.*?)', $route));
+        // make last slash optional
+        if(!$strict && substr($subPattern, -1) === '/') {
+            $subPattern .= '?';
+        }
+        $pattern = '/^'.$subPattern.'$/';
         $isMatched = (int)preg_match($pattern, $path, $matches);
         $slized = array_slice($matches, 1);
         if ($isMatched === 1 && count($slized) == count($keys)) {

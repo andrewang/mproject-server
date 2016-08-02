@@ -6,10 +6,12 @@
  * Project: M-Project
  */
 
+declare(strict_types=1);
+
 namespace Core\Controller;
 
-
 use Core\HTTP\Response;
+use Core\Template\Templare;
 
 /**
  * Class Controller
@@ -35,5 +37,10 @@ class Controller
     {
         $response = new Response($content);
         return $response->setType('text/html');
+    }
+    
+    protected function template(string $templateName) : Templare
+    {
+        return new Templare($templateName);
     }
 }

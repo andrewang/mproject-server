@@ -8,12 +8,20 @@
 
 return array(
     'router' => array(
+        '/' => array(
+            'controller' => 'Base\Landing',
+            'method' => 'indexAction'
+        ),
         '/api/v1/data/manga/{id}/' => array(
             'controller' => 'Api\v1\Data',
             'method' => 'getManga',
             'types' => array(
                 'id' => 'int'
             )
+        ),
+        '/test/' => array(
+            'controller' => 'Test\Test',
+            'method' => 'indexAction'
         ),
         '/api/import/manga/{scraper}/{name}/' => array(
             'controller' => 'Api\Import\Collector',
